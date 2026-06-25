@@ -1,0 +1,19 @@
+{
+  "name": "青峰见财讯VIP服务",
+  "short_name": "青峰见财讯VIP",
+  "description": "面向中小投资者的研究陪伴、社群交流与投资者教育服务。",
+  "lang": "zh-CN",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#f5f1ea",
+  "theme_color": "#101114",
+  "icons": [
+    {
+      "src": "/assets/site-icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

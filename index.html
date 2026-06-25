@@ -8,18 +8,481 @@
     <meta name="theme-color" content="#0f1116" media="(prefers-color-scheme: dark)" />
     <meta
       name="description"
-      content="青峰见财讯VIP服务，致力于中小投资者教育，提供精选股池、盘面解读、盘中机会、社群交流与教学服务。"
+      content="青峰见财讯VIP服务面向中小投资者提供系统化复盘、精选股池、盘中机会提醒、核心标的跟踪、社群交流与持续教学服务。"
     />
-    <title>青峰见财讯VIP服务</title>
+    <title>青峰见财讯VIP服务｜中小投资者教育与研究陪伴</title>
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <meta name="keywords" content="青峰见财讯,青峰见财讯VIP服务,投资者教育,精选股池,盘面解读,盘中机会,股票复盘,FollowMe,iFollow.ME" />
+    <meta name="author" content="iFollow.ME" />
+    <link rel="canonical" href="https://www.ifollow.me/" />
+    <link rel="alternate" href="https://www.ifollow.me/" hreflang="zh-CN" />
+    <link rel="alternate" href="https://www.ifollow.me/" hreflang="x-default" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="zh_CN" />
+    <meta property="og:site_name" content="青峰见财讯VIP服务" />
+    <meta property="og:title" content="青峰见财讯VIP服务｜中小投资者教育与研究陪伴" />
+    <meta property="og:description" content="系统化复盘、核心标的跟踪、精选股池、盘中机会提醒与社群教学，帮助中小投资者建立看盘、复盘和交易体系。" />
+    <meta property="og:url" content="https://www.ifollow.me/" />
+    <meta property="og:image" content="https://www.ifollow.me/assets/og-image.svg" />
+    <meta property="og:image:type" content="image/svg+xml" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="青峰见财讯VIP服务" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="青峰见财讯VIP服务｜中小投资者教育与研究陪伴" />
+    <meta name="twitter:description" content="系统化复盘、精选股池、盘中机会提醒、核心标的跟踪与社群教学服务。" />
+    <meta name="twitter:image" content="https://www.ifollow.me/assets/og-image.svg" />
     <meta name="crisp-website-id" content="b2afd5c0-4ec5-4f84-966b-9ebc83d285fa" />
     <link rel="icon" href="assets/site-icon.svg" type="image/svg+xml" />
-    <link rel="stylesheet" href="styles.css" />
+    <link rel="manifest" href="manifest.webmanifest" />
+    <style>
+      :root {
+        --ink: #101114;
+        --ink-soft: #25272d;
+        --mist: #f5f1ea;
+        --accent: #ff2d1b;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        min-height: 100%;
+        margin: 0;
+        background: var(--mist);
+      }
+
+      body {
+        color: var(--ink);
+        font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", Arial, sans-serif;
+        letter-spacing: 0;
+        text-rendering: optimizeLegibility;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      img {
+        display: block;
+        max-width: 100%;
+        height: auto;
+      }
+
+      .site-header {
+        position: fixed;
+        top: 0;
+        right: 0;
+        left: 0;
+        z-index: 40;
+        padding: 10px 14px;
+        pointer-events: none;
+      }
+
+      .nav-shell {
+        display: flex;
+        width: min(1160px, 100%);
+        min-height: 54px;
+        align-items: center;
+        justify-content: space-between;
+        margin: 0 auto;
+        padding: 0 12px;
+        border: 1px solid rgba(202, 210, 216, 0.74);
+        border-radius: 8px;
+        background: rgba(255, 255, 255, 0.82);
+        box-shadow: 0 16px 40px rgba(17, 19, 24, 0.08);
+        pointer-events: auto;
+      }
+
+      .brand,
+      .button,
+      .hero-actions {
+        display: inline-flex;
+        align-items: center;
+      }
+
+      .brand {
+        gap: 10px;
+        min-width: 0;
+        font-weight: 700;
+      }
+
+      .brand-mark {
+        width: 30px;
+        height: 30px;
+        border-radius: 8px;
+      }
+
+      .brand-name {
+        overflow: hidden;
+        max-width: 52vw;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      .menu-button {
+        display: flex;
+        width: 40px;
+        height: 40px;
+        flex-direction: column;
+        gap: 5px;
+        align-items: center;
+        justify-content: center;
+        border: 0;
+        background: transparent;
+      }
+
+      .menu-button span {
+        display: block;
+        width: 19px;
+        height: 2px;
+        border-radius: 999px;
+        background: currentColor;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .hero {
+        position: relative;
+        display: flex;
+        min-height: 80svh;
+        align-items: center;
+        overflow: hidden;
+        padding: 116px 20px 70px;
+        background: var(--mist);
+      }
+
+      #marketCanvas {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+      }
+
+      .hero::after {
+        position: absolute;
+        inset: auto 0 0;
+        height: 32%;
+        background: linear-gradient(180deg, rgba(245, 241, 234, 0), var(--mist) 88%);
+        content: "";
+        pointer-events: none;
+      }
+
+      .hero-inner {
+        position: relative;
+        z-index: 1;
+        width: min(1160px, 100%);
+        margin: 0 auto;
+      }
+
+      .eyebrow {
+        margin: 0 0 14px;
+        color: var(--accent);
+        font-size: 12px;
+        font-weight: 800;
+        line-height: 1.2;
+      }
+
+      .hero h1 {
+        max-width: 1120px;
+        margin: 0;
+        color: var(--ink);
+        font-size: clamp(48px, 15vw, 104px);
+        font-weight: 820;
+        line-height: 0.98;
+      }
+
+      .no-break {
+        white-space: nowrap;
+      }
+
+      .hero-copy {
+        max-width: 650px;
+        margin: 22px 0 0;
+        color: var(--ink-soft);
+        font-size: clamp(18px, 4.7vw, 24px);
+        line-height: 1.58;
+      }
+
+      .hero-actions {
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-top: 30px;
+      }
+
+      .button {
+        min-height: 46px;
+        justify-content: center;
+        padding: 0 22px;
+        border: 1px solid transparent;
+        border-radius: 999px;
+        font-size: 15px;
+        font-weight: 750;
+        line-height: 1;
+      }
+
+      .button-dark {
+        color: #fff;
+        background: var(--ink);
+      }
+
+      .button-light,
+      .button-consult {
+        border-color: rgba(17, 19, 24, 0.15);
+        color: var(--ink);
+        background: rgba(255, 255, 255, 0.82);
+      }
+
+      .button-consult {
+        gap: 8px;
+        color: var(--accent);
+      }
+
+      .button-consult::before {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: #18c77a;
+        content: "";
+      }
+
+      @media (min-width: 900px) {
+        .menu-button {
+          display: none;
+        }
+
+        .nav-links {
+          display: flex;
+          gap: 2px;
+          align-items: center;
+        }
+
+        .nav-links a {
+          padding: 11px 12px;
+          font-size: 14px;
+          font-weight: 650;
+        }
+      }
+
+      @media (max-width: 699px) {
+        .site-header {
+          padding: 8px 14px;
+        }
+
+        .nav-shell {
+          min-height: 50px;
+          padding: 0 10px;
+        }
+
+        .brand-name {
+          max-width: 62vw;
+        }
+
+        .hero {
+          min-height: 64svh;
+          padding: 88px 20px 46px;
+        }
+
+        .eyebrow {
+          margin-bottom: 10px;
+          font-size: 11px;
+        }
+
+        .hero h1 {
+          font-size: clamp(42px, 12.8vw, 56px);
+          line-height: 1.03;
+        }
+
+        .hero-copy {
+          margin-top: 16px;
+          font-size: 16px;
+          line-height: 1.55;
+        }
+
+        .hero-actions {
+          display: grid;
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          gap: 8px;
+          width: min(100%, 420px);
+          margin-top: 22px;
+        }
+
+        .hero-actions .button {
+          min-height: 42px;
+          padding: 0 14px;
+          font-size: 13px;
+          white-space: nowrap;
+        }
+
+        .hero-actions .button-consult {
+          grid-column: 1 / -1;
+          min-height: 44px;
+        }
+      }
+
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --ink: #f5f3ee;
+          --ink-soft: #d6d9df;
+          --mist: #0f1116;
+          --accent: #ff503f;
+        }
+
+        .nav-shell {
+          border-color: rgba(255, 255, 255, 0.1);
+          background: rgba(18, 21, 29, 0.86);
+        }
+
+        .button-light,
+        .button-consult {
+          border-color: rgba(255, 255, 255, 0.13);
+          color: var(--ink);
+          background: rgba(255, 255, 255, 0.07);
+        }
+      }
+    </style>
+    <link rel="preload" href="styles.css" as="style" fetchpriority="high" onload="this.onload=null;this.rel='stylesheet'" />
+    <noscript><link rel="stylesheet" href="styles.css" /></noscript>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "Organization",
+            "@id": "https://www.ifollow.me/#organization",
+            "name": "iFollow.ME",
+            "url": "https://www.ifollow.me/",
+            "logo": "https://www.ifollow.me/assets/site-icon.svg",
+            "sameAs": ["https://x.com/QFJzenghui"]
+          },
+          {
+            "@type": "WebSite",
+            "@id": "https://www.ifollow.me/#website",
+            "url": "https://www.ifollow.me/",
+            "name": "青峰见财讯VIP服务",
+            "description": "面向中小投资者的研究陪伴、社群交流与投资者教育服务。",
+            "inLanguage": "zh-CN",
+            "publisher": {
+              "@id": "https://www.ifollow.me/#organization"
+            }
+          },
+          {
+            "@type": "Service",
+            "@id": "https://www.ifollow.me/#service",
+            "name": "青峰见财讯VIP服务",
+            "serviceType": "投资者教育与研究陪伴服务",
+            "url": "https://www.ifollow.me/",
+            "provider": {
+              "@id": "https://www.ifollow.me/#organization"
+            },
+            "areaServed": "CN",
+            "audience": {
+              "@type": "Audience",
+              "audienceType": "中小投资者"
+            },
+            "offers": [
+              {
+                "@type": "Offer",
+                "name": "月体验会员",
+                "price": "300",
+                "priceCurrency": "CNY",
+                "url": "https://invest.xdigitallife.com/product/20",
+                "availability": "https://schema.org/InStock"
+              },
+              {
+                "@type": "Offer",
+                "name": "年体验会员",
+                "price": "1500",
+                "priceCurrency": "CNY",
+                "url": "https://invest.xdigitallife.com/product/19",
+                "availability": "https://schema.org/InStock"
+              }
+            ]
+          },
+          {
+            "@type": "FAQPage",
+            "@id": "https://www.ifollow.me/#faq",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "能先免费体验一段时间吗？",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "不能。我们从2023年开始做C端以来，没有免费体验的先例。且，我们专门提供了月体验群服务，300元/月。如果觉得一下子买年服务不放心的话，可以考虑月体验服务。"
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "年费服务和月费服务有什么区别？",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "年费服务是我们核心服务，提供一个禁言群用于接收消息，外加一个交流群用于交流。平时盘中的机会、个案教学和直播课程都是面向年费用户的。月费服务是以体验为主，提供一个禁言群用于接收消息，比年费群少一个交流群。"
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "不是你们推荐的个股可以咨询吗？",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "可以。可以私下交流。看到后会及时回复。"
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "你们是游资，还是私募？",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "都不是。我们早期给一些私募做量化模型研发，2023年开始做C端用户，本身我们自己也做一级市场和二级市场的投资，就顺带着服务自己的粉丝。"
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "目前会员群的都是什么人居多？",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "中小投资者居多，也就是所谓的散户。群里也有资金体量比较大的老粉。我们希望通过系统的服务，帮助更多散户建立自己的看盘体系、复盘体系和交易体系。"
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "费用能优惠吗？",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "不能。本身我们的收费不高，跟着我们的老粉都知道，我们不议价。"
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "怎么付费？",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "可以站点直接下单，或者根据我们提供的支付宝账户付款并保留付款凭证，然后通过提供的联系方式加我们好友，提供付款凭证后，我们会把你加入对应群组。"
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "以什么形式接收消息？",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "企业微信群和电报群。后面会以电报群为主，目前两者都有，正在慢慢往电报群迁移。"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    </script>
   </head>
   <body>
     <header class="site-header" data-header>
       <nav class="nav-shell" aria-label="主导航">
         <a class="brand" href="#top" aria-label="青峰见财讯VIP服务首页">
-          <img class="brand-mark" src="assets/site-icon.svg" alt="" aria-hidden="true" />
+          <img class="brand-mark" src="assets/site-icon.svg" width="30" height="30" alt="" aria-hidden="true" decoding="async" fetchpriority="high" />
           <span class="brand-name">青峰见财讯VIP服务</span>
         </a>
 
@@ -35,6 +498,7 @@
           <a href="https://invest.xdigitallife.com/" target="_blank" rel="noopener noreferrer">商城</a>
           <a href="#community">社群</a>
           <a href="#contact">联系</a>
+          <a href="#qa">问答</a>
         </div>
       </nav>
     </header>
@@ -257,7 +721,7 @@
                 <h3>@HelloLZH</h3>
                 <p>搜索 ID 或扫描二维码添加好友。</p>
               </div>
-              <img src="assets/telegram-qr.png" alt="Telegram @HelloLZH 二维码" />
+              <img src="assets/telegram-qr.png" width="728" height="896" alt="Telegram @HelloLZH 二维码" loading="lazy" decoding="async" />
               <button class="copy-button" type="button" data-copy="@HelloLZH">复制 Telegram ID</button>
               <div class="telegram-guide" aria-label="电报申请和购买账号教程">
                 <div class="telegram-guide-copy">
@@ -293,7 +757,7 @@
                 <h3>微信扫码添加</h3>
                 <p>使用微信扫描二维码即可添加企业微信。</p>
               </div>
-              <img src="assets/wecom-qr.png" alt="企业微信二维码" />
+              <img src="assets/wecom-qr.png" width="410" height="406" alt="企业微信二维码" loading="lazy" decoding="async" />
             </article>
 
             <article class="contact-card compact-contact">
@@ -321,11 +785,118 @@
         </div>
       </section>
 
+      <section class="section faq-section" id="qa" aria-labelledby="qa-title">
+        <div class="section-inner">
+          <div class="section-heading faq-heading">
+            <p class="section-kicker">Q&As</p>
+            <h2 id="qa-title">常见问题</h2>
+            <p>把购买前最常见的顾虑先说清楚。若仍有其他问题，可以通过在线客服、Telegram、企业微信或邮箱继续咨询。</p>
+          </div>
+
+          <div class="faq-list">
+            <article class="faq-item">
+              <button class="faq-question" type="button">
+                <span>Q</span>
+                <span class="faq-question-title">能先免费体验一段时间吗？</span>
+              </button>
+              <div class="faq-answer">
+                <span>A</span>
+                <p>不能。我们从2023年开始做C端以来，没有免费体验的先例。且，我们专门提供了月体验群服务，300元/月。如果觉得一下子买年服务不放心的话，可以考虑月体验服务。</p>
+              </div>
+            </article>
+
+            <article class="faq-item">
+              <button class="faq-question" type="button">
+                <span>Q</span>
+                <span class="faq-question-title">年费服务和月费服务有什么区别？</span>
+              </button>
+              <div class="faq-answer">
+                <span>A</span>
+                <p>年费服务是我们核心服务，提供一个禁言群用于接收消息，外加一个交流群用于交流。平时盘中的机会、个案教学和直播课程都是面向年费用户的。月费服务是以体验为主，提供一个禁言群用于接收消息，比年费群少一个交流群。</p>
+              </div>
+            </article>
+
+            <article class="faq-item">
+              <button class="faq-question" type="button">
+                <span>Q</span>
+                <span class="faq-question-title">不是你们推荐的个股可以咨询吗？</span>
+              </button>
+              <div class="faq-answer">
+                <span>A</span>
+                <p>可以。可以私下交流。看到后会及时回复。</p>
+              </div>
+            </article>
+
+            <article class="faq-item">
+              <button class="faq-question" type="button">
+                <span>Q</span>
+                <span class="faq-question-title">你们是游资，还是私募？</span>
+              </button>
+              <div class="faq-answer">
+                <span>A</span>
+                <p>都不是。我们早期给一些私募做量化模型研发，2023年开始做C端用户，本身我们自己也做一级市场和二级市场的投资，就顺带着服务自己的粉丝。</p>
+              </div>
+            </article>
+
+            <article class="faq-item">
+              <button class="faq-question" type="button">
+                <span>Q</span>
+                <span class="faq-question-title">目前会员群的都是什么人居多？</span>
+              </button>
+              <div class="faq-answer">
+                <span>A</span>
+                <p>中小投资者居多，也就是所谓的“散户”。当然群里也有资金体量比较大的，这些基本上都是跟着我们多年的老粉。我们希望通过我们系统的服务，能够帮助更多的散户建立自己的看盘体系、复盘体系和交易体系。这些只能潜移默化的去影响我们的用户。</p>
+              </div>
+            </article>
+
+            <article class="faq-item">
+              <button class="faq-question" type="button">
+                <span>Q</span>
+                <span class="faq-question-title">费用能优惠吗？</span>
+              </button>
+              <div class="faq-answer">
+                <span>A</span>
+                <p>不能。本身我们的收费不高，跟着我们的老粉都知道，我们不议价。</p>
+              </div>
+            </article>
+
+            <article class="faq-item">
+              <button class="faq-question" type="button">
+                <span>Q</span>
+                <span class="faq-question-title">怎么付费？</span>
+              </button>
+              <div class="faq-answer">
+                <span>A</span>
+                <p>可以站点直接下单或者直接根据我们提供的支付宝账户付款，保留付款凭证，然后通过我们提供的联系方式加我们好友，提供付款凭证，我们会把你加入对应的群组。</p>
+              </div>
+            </article>
+
+            <article class="faq-item">
+              <button class="faq-question" type="button">
+                <span>Q</span>
+                <span class="faq-question-title">以什么形式接收消息？</span>
+              </button>
+              <div class="faq-answer">
+                <span>A</span>
+                <p>企业微信群和电报群。后面会以电报群为主，目前两者都有，正在慢慢的往电报群迁移。</p>
+              </div>
+            </article>
+          </div>
+
+          <div class="faq-closer">
+            <p>有更多问题可以随时跟我们联系进行咨询，祝投资顺利！</p>
+            <button class="button button-consult" type="button" data-crisp-trigger>在线咨询</button>
+          </div>
+        </div>
+      </section>
+
     </main>
 
     <footer class="site-footer">
       <div class="footer-info">
-        <p class="footer-copyright">青峰见财讯VIP服务 ©️ 2026 iFollow.ME v1.0.0</p>
+        <p class="footer-copyright" data-footer-copyright>
+          <span data-footer-site-name>青峰见财讯VIP服务</span> © <span data-footer-year>2026</span> <span data-footer-owner>iFollow.Me</span> <span data-site-version>v1.2.1</span>
+        </p>
         <p class="footer-mission">致力于中小投资者教育</p>
       </div>
       <div class="footer-links">
@@ -348,6 +919,6 @@
       <a href="https://invest.xdigitallife.com/product/19" target="_blank" rel="noopener noreferrer">年会员</a>
     </div>
 
-    <script src="script.js"></script>
+    <script defer src="script.js"></script>
   </body>
 </html>

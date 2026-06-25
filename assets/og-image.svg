@@ -1,0 +1,14 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="630" fill="#F5F1EA"/>
+  <path d="M0 120H1200M0 240H1200M0 360H1200M0 480H1200M150 0V630M300 0V630M450 0V630M600 0V630M750 0V630M900 0V630M1050 0V630" stroke="#E1D8CB" stroke-width="1.2" opacity=".65"/>
+  <path d="M-40 338C120 264 247 267 410 334C560 396 663 360 805 278C942 199 1060 222 1240 322" stroke="#FF2D20" stroke-width="10" stroke-linecap="round" opacity=".55"/>
+  <path d="M-20 445C134 450 230 354 380 356C532 358 635 458 792 408C946 359 1030 385 1220 430" stroke="#111216" stroke-width="5" stroke-linecap="round" opacity=".18"/>
+  <path d="M40 510H92V594H40V510ZM170 478H222V594H170V478ZM300 528H352V594H300V528ZM430 492H482V594H430V492ZM560 450H612V594H560V450ZM690 516H742V594H690V516ZM820 462H872V594H820V462ZM950 535H1002V594H950V535ZM1080 502H1132V594H1080V502Z" fill="#A6C7B7" opacity=".28"/>
+  <path d="M105 548H157V594H105V548ZM235 510H287V594H235V510ZM365 458H417V594H365V458ZM495 536H547V594H495V536ZM625 492H677V594H625V492ZM755 530H807V594H755V530ZM885 470H937V594H885V470ZM1015 548H1067V594H1015V548Z" fill="#FF7B6E" opacity=".22"/>
+  <rect x="82" y="74" width="88" height="88" rx="24" fill="#111216"/>
+  <path d="M126 98C149.7 98 162 114.2 162 129.9C162 151.5 141.6 162 124.5 162C102.9 162 90 145.9 90 129.8C90 108.9 108 98 126 98ZM125.1 117.2C116.8 117.2 110.9 122.9 110.9 130.2C110.9 138.1 116.8 143.1 125.3 143.1C133.6 143.1 141.1 138.1 141.1 129.6C141.1 122 134.8 117.2 125.1 117.2Z" fill="#F5F1EA"/>
+  <text x="83" y="220" fill="#FF2D20" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="34" font-weight="800" letter-spacing="1">VIP SERVICE FOR INVESTOR EDUCATION</text>
+  <text x="80" y="350" fill="#101114" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="104" font-weight="900">青峰见财讯VIP服务</text>
+  <text x="84" y="430" fill="#30333B" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="38" font-weight="600">系统化复盘 · 精选股池 · 盘中机会 · 社群教学</text>
+  <text x="84" y="540" fill="#101114" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="28" font-weight="700">www.ifollow.me</text>
+</svg>
