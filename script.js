@@ -70,7 +70,7 @@ const fallbackSiteConfig = {
   siteName: footerSiteName?.textContent.trim() || "青峰见财讯VIP服务",
   copyrightYear: footerYear?.textContent.trim() || "2026",
   owner: footerOwner?.textContent.trim() || "iFollow.Me",
-  version: siteVersion?.textContent.trim().replace(/^v/i, "") || "1.2.1",
+  version: siteVersion?.textContent.trim().replace(/^v/i, "") || "1.2.2",
 };
 
 function normalizeVersion(version) {

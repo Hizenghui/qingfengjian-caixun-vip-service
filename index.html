@@ -72,6 +72,10 @@
         height: auto;
       }
 
+      .mobile-loading-screen {
+        display: none;
+      }
+
       .site-header {
         position: fixed;
         top: 0;
@@ -270,6 +274,73 @@
       }
 
       @media (max-width: 699px) {
+        html.mobile-splash-active,
+        html.mobile-splash-active body {
+          overflow: hidden;
+        }
+
+        html.mobile-splash-active .crisp-reminder,
+        html.mobile-splash-active .mobile-cta,
+        html.mobile-splash-active .crisp-client {
+          visibility: hidden !important;
+          opacity: 0 !important;
+          pointer-events: none !important;
+        }
+
+        .mobile-loading-screen {
+          position: fixed;
+          z-index: 2147483647;
+          inset: 0;
+          display: grid;
+          place-items: center;
+          padding: max(28px, env(safe-area-inset-top)) 28px max(28px, env(safe-area-inset-bottom));
+          visibility: hidden;
+          opacity: 0;
+          background: var(--mist);
+          pointer-events: none;
+          transition:
+            opacity 280ms ease,
+            visibility 0s linear 280ms;
+        }
+
+        html.mobile-splash-active .mobile-loading-screen {
+          visibility: visible;
+          opacity: 1;
+          pointer-events: auto;
+          transition:
+            opacity 180ms ease,
+            visibility 0s linear 0s;
+        }
+
+        .mobile-loading-content {
+          display: grid;
+          justify-items: center;
+          text-align: center;
+        }
+
+        .mobile-loading-logo {
+          width: 68px;
+          height: 68px;
+        }
+
+        .mobile-loading-message {
+          margin: 22px 0 0;
+          color: var(--ink);
+          font-size: 16px;
+          font-weight: 650;
+          line-height: 1.5;
+        }
+
+        .mobile-loading-spinner {
+          width: 22px;
+          height: 22px;
+          margin-top: 24px;
+          border: 2px solid rgba(127, 127, 127, 0.22);
+          border-top-color: var(--accent);
+          border-radius: 50%;
+          animation: mobile-loading-spin 900ms linear infinite;
+        }
+
         .site-header {
           padding: 8px 14px;
         }
@@ -325,6 +396,22 @@
         }
       }
 
+      @keyframes mobile-loading-spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .mobile-loading-screen {
+          transition: none;
+        }
+
+        .mobile-loading-spinner {
+          animation-duration: 1800ms;
+        }
+      }
+
       @media (prefers-color-scheme: dark) {
         :root {
           --ink: #f5f3ee;
@@ -346,6 +433,93 @@
         }
       }
     </style>
+    <script>
+      (() => {
+        const root = document.documentElement;
+        const mobileViewport = window.matchMedia("(max-width: 699px)").matches;
+        const mobileDevice =
+          mobileViewport &&
+          (window.matchMedia("(pointer: coarse)").matches ||
+            /Android|iPhone|iPod|Mobile/i.test(navigator.userAgent));
+
+        if (!mobileDevice) return;
+
+        const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+        const effectiveType = connection?.effectiveType || "";
+        const slowNetwork = Boolean(
+          connection &&
+            (connection.saveData ||
+              effectiveType === "slow-2g" ||
+              effectiveType === "2g" ||
+              effectiveType === "3g" ||
+              connection.rtt >= 300 ||
+              (connection.downlink > 0 && connection.downlink <= 1.5))
+        );
+        const state = {
+          finished: false,
+          shownAt: 0,
+          showTimer: 0,
+          failSafeTimer: 0,
+        };
+        const minimumVisibleTime = 600;
+
+        function showMobileSplash() {
+          if (state.finished || state.shownAt) return;
+          state.shownAt = performance.now();
+          root.classList.add("mobile-splash-active");
+        }
+
+        function removeMobileSplash() {
+          root.classList.remove("mobile-splash-active");
+          root.classList.add("mobile-splash-complete");
+          window.setTimeout(() => {
+            document.getElementById("mobile-loading-screen")?.setAttribute("hidden", "");
+          }, 300);
+        }
+
+        function finishMobileSplash() {
+          if (state.finished) return;
+          state.finished = true;
+          window.clearTimeout(state.showTimer);
+          window.clearTimeout(state.failSafeTimer);
+
+          if (!state.shownAt) {
+            removeMobileSplash();
+            return;
+          }
+
+          const remaining = Math.max(0, minimumVisibleTime - (performance.now() - state.shownAt));
+          window.setTimeout(removeMobileSplash, remaining);
+        }
+
+        if (slowNetwork) {
+          showMobileSplash();
+        } else {
+          state.showTimer = window.setTimeout(showMobileSplash, 1400);
+        }
+
+        state.failSafeTimer = window.setTimeout(finishMobileSplash, 10000);
+
+        const finishAfterPaint = () => {
+          window.requestAnimationFrame(() => {
+            window.requestAnimationFrame(finishMobileSplash);
+          });
+        };
+
+        if (document.readyState === "complete") {
+          finishAfterPaint();
+        } else {
+          window.addEventListener("load", finishAfterPaint, { once: true });
+        }
+
+        window.__mobileSplash = {
+          isMobile: true,
+          slowNetwork,
+          show: showMobileSplash,
+          finish: finishMobileSplash,
+        };
+      })();
+    </script>
     <link rel="preload" href="styles.css" as="style" fetchpriority="high" onload="this.onload=null;this.rel='stylesheet'" />
     <noscript><link rel="stylesheet" href="styles.css" /></noscript>
     <script type="application/ld+json">
@@ -479,6 +653,32 @@
     </script>
   </head>
   <body>
+    <div
+      class="mobile-loading-screen"
+      id="mobile-loading-screen"
+      role="status"
+      aria-live="polite"
+      aria-label="页面正在加载"
+    >
+      <div class="mobile-loading-content">
+        <svg class="mobile-loading-logo" viewBox="0 0 128 128" aria-hidden="true" focusable="false">
+          <rect width="128" height="128" rx="30" fill="#101114" />
+          <path
+            d="M28 82 49 62l16 13 28-37 15 13"
+            fill="none"
+            stroke="#ff2d1b"
+            stroke-width="10"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+          <path d="M27 96h74" fill="none" stroke="#fff" stroke-width="8" stroke-linecap="round" opacity=".9" />
+          <circle cx="92" cy="38" r="8" fill="#fff" />
+        </svg>
+        <p class="mobile-loading-message">致力于中小投资者教育</p>
+        <span class="mobile-loading-spinner" aria-hidden="true"></span>
+      </div>
+    </div>
+
     <header class="site-header" data-header>
       <nav class="nav-shell" aria-label="主导航">
         <a class="brand" href="#top" aria-label="青峰见财讯VIP服务首页">
@@ -895,7 +1095,7 @@
     <footer class="site-footer">
       <div class="footer-info">
         <p class="footer-copyright" data-footer-copyright>
-          <span data-footer-site-name>青峰见财讯VIP服务</span> © <span data-footer-year>2026</span> <span data-footer-owner>iFollow.Me</span> <span data-site-version>v1.2.1</span>
+          <span data-footer-site-name>青峰见财讯VIP服务</span> © <span data-footer-year>2026</span> <span data-footer-owner>iFollow.Me</span> <span data-site-version>v1.2.2</span>
         </p>
         <p class="footer-mission">致力于中小投资者教育</p>
       </div>
