@@ -1,0 +1,15 @@
+{
+  "name": "qingfengjian-caixun-vip-service",
+  "version": "1.3.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build-static.mjs",
+    "test": "node --test",
+    "telegram:discover": "node scripts/discover-telegram-chat.mjs",
+    "telegram:webhook": "node scripts/configure-telegram-webhook.mjs"
+  },
+  "engines": {
+    "node": "24.x"
+  }
+}

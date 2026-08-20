@@ -32,7 +32,6 @@
     <meta name="twitter:title" content="青峰见财讯VIP服务｜中小投资者教育与研究陪伴" />
     <meta name="twitter:description" content="系统化复盘、精选股池、盘中机会提醒、核心标的跟踪与社群教学服务。" />
     <meta name="twitter:image" content="https://www.ifollow.me/assets/og-image.svg" />
-    <meta name="crisp-website-id" content="b2afd5c0-4ec5-4f84-966b-9ebc83d285fa" />
     <link rel="icon" href="assets/site-icon.svg" type="image/svg+xml" />
     <link rel="manifest" href="manifest.webmanifest" />
     <style>
@@ -279,9 +278,10 @@
           overflow: hidden;
         }
 
-        html.mobile-splash-active .crisp-reminder,
-        html.mobile-splash-active .mobile-cta,
-        html.mobile-splash-active .crisp-client {
+        html.mobile-splash-active .support-launcher,
+        html.mobile-splash-active .support-chat,
+        html.mobile-splash-active .support-chat-backdrop,
+        html.mobile-splash-active .mobile-cta {
           visibility: hidden !important;
           opacity: 0 !important;
           pointer-events: none !important;
@@ -715,7 +715,7 @@
           <div class="hero-actions" aria-label="主要操作">
             <a class="button button-dark" href="https://invest.xdigitallife.com/product/19" target="_blank" rel="noopener noreferrer">购买年会员</a>
             <a class="button button-light" href="#services">查看服务权益</a>
-            <button class="button button-consult" type="button" data-crisp-trigger>在线咨询</button>
+            <button class="button button-consult" type="button" data-chat-trigger>在线咨询</button>
           </div>
         </div>
       </section>
@@ -1085,7 +1085,7 @@
 
           <div class="faq-closer">
             <p>有更多问题可以随时跟我们联系进行咨询，祝投资顺利！</p>
-            <button class="button button-consult" type="button" data-crisp-trigger>在线咨询</button>
+            <button class="button button-consult" type="button" data-chat-trigger>在线咨询</button>
           </div>
         </div>
       </section>
@@ -1095,7 +1095,7 @@
     <footer class="site-footer">
       <div class="footer-info">
         <p class="footer-copyright" data-footer-copyright>
-          <span data-footer-site-name>青峰见财讯VIP服务</span> © <span data-footer-year>2026</span> <span data-footer-owner>iFollow.Me</span> <span data-site-version>v1.2.3</span>
+          <span data-footer-site-name>青峰见财讯VIP服务</span> © <span data-footer-year>2026</span> <span data-footer-owner>iFollow.Me</span> <span data-site-version>v1.3.0</span>
         </p>
         <p class="footer-mission">致力于中小投资者教育</p>
       </div>
@@ -1109,8 +1109,58 @@
       </div>
     </footer>
 
-    <button class="crisp-reminder" type="button" data-crisp-trigger aria-label="打开 Crisp 在线客服">
-      <span class="crisp-reminder-dot" aria-hidden="true"></span>
+    <div class="support-chat-backdrop" data-chat-close hidden></div>
+
+    <section class="support-chat" data-support-chat aria-hidden="true" hidden>
+      <div class="support-chat-panel" role="dialog" aria-modal="false" aria-labelledby="support-chat-title">
+        <header class="support-chat-header">
+          <div class="support-chat-identity">
+            <img src="assets/site-icon.svg" width="38" height="38" alt="" aria-hidden="true" />
+            <div>
+              <strong id="support-chat-title">青峰见财讯客服</strong>
+              <span class="support-chat-status">
+                <i class="support-status-dot" aria-hidden="true"></i>
+                <span data-chat-status>正在连接</span>
+              </span>
+            </div>
+          </div>
+          <button class="support-chat-close" type="button" data-chat-close aria-label="关闭在线客服">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="m6.8 5.4 5.2 5.2 5.2-5.2 1.4 1.4-5.2 5.2 5.2 5.2-1.4 1.4-5.2-5.2-5.2 5.2-1.4-1.4 5.2-5.2-5.2-5.2 1.4-1.4Z" />
+            </svg>
+          </button>
+        </header>
+
+        <div class="support-chat-body" data-chat-scroll>
+          <p class="support-chat-day">在线咨询</p>
+          <div class="support-chat-messages" data-chat-messages role="log" aria-live="polite" aria-relevant="additions text"></div>
+          <div class="support-chat-notice" data-chat-notice role="status" hidden></div>
+        </div>
+
+        <footer class="support-chat-footer">
+          <form class="support-chat-form" data-chat-form>
+            <label class="visually-hidden" for="support-chat-input">输入咨询内容</label>
+            <textarea
+              id="support-chat-input"
+              data-chat-input
+              rows="1"
+              maxlength="1000"
+              placeholder="请输入你的问题"
+              enterkeyhint="send"
+            ></textarea>
+            <button class="support-chat-send" type="submit" data-chat-send aria-label="发送消息">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="m4 4 17 8-17 8 2.4-7H14v-2H6.4L4 4Z" />
+              </svg>
+            </button>
+          </form>
+          <p>请勿发送账户密码等敏感信息。也可通过 <a href="https://t.me/HelloLZH" target="_blank" rel="noopener noreferrer">Telegram</a> 联系。</p>
+        </footer>
+      </div>
+    </section>
+
+    <button class="support-launcher" type="button" data-chat-trigger aria-label="打开在线客服">
+      <span class="support-launcher-dot" aria-hidden="true"></span>
       <span>在线客服</span>
     </button>
 

@@ -1,4 +1,8 @@
 .DS_Store
 .vercel/
 .vercel-dns-override.cjs
+.env
+.env.*
+!.env.example
+dist/
 tmp/

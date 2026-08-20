@@ -1,13 +1,11 @@
 const header = document.querySelector("[data-header]");
 const menuButton = document.querySelector("[data-menu-button]");
 const navLinks = Array.from(document.querySelectorAll(".nav-links a"));
-const crispTriggers = Array.from(document.querySelectorAll("[data-crisp-trigger]"));
+const chatTriggers = Array.from(document.querySelectorAll("[data-chat-trigger]"));
 const footerSiteName = document.querySelector("[data-footer-site-name]");
 const footerYear = document.querySelector("[data-footer-year]");
 const footerOwner = document.querySelector("[data-footer-owner]");
 const siteVersion = document.querySelector("[data-site-version]");
-const crispWebsiteId = document.querySelector('meta[name="crisp-website-id"]')?.content.trim() || "";
-const crispEnabled = Boolean(crispWebsiteId);
 
 function runWhenIdle(callback, timeout = 1200) {
   if ("requestIdleCallback" in window) {
@@ -70,7 +68,7 @@ const fallbackSiteConfig = {
   siteName: footerSiteName?.textContent.trim() || "青峰见财讯VIP服务",
   copyrightYear: footerYear?.textContent.trim() || "2026",
   owner: footerOwner?.textContent.trim() || "iFollow.Me",
-  version: siteVersion?.textContent.trim().replace(/^v/i, "") || "1.2.3",
+  version: siteVersion?.textContent.trim().replace(/^v/i, "") || "1.3.0",
 };
 
 function normalizeVersion(version) {
@@ -111,49 +109,29 @@ function setMenu(open) {
   menuButton.setAttribute("aria-label", open ? "关闭导航" : "打开导航");
 }
 
-let crispScriptRequested = false;
+let supportChatModulePromise;
 
-function loadCrispChat() {
-  if (!crispEnabled) return;
-
-  window.$crisp = window.$crisp || [];
-  if (!window.CRISP_WEBSITE_ID) {
-    window.CRISP_WEBSITE_ID = crispWebsiteId;
-    window.CRISP_RUNTIME_CONFIG = { locale: "zh" };
-    window.$crisp.push(["set", "session:data", [[["source", "qfj-vip-landing"]]]]);
-    window.$crisp.push(["set", "message:text", ["你好，我想了解青峰见财讯VIP服务。"]]);
+function loadSupportChat() {
+  if (!supportChatModulePromise) {
+    supportChatModulePromise = import("./support-chat.js");
   }
-
-  if (crispScriptRequested || document.querySelector("script[data-crisp-client]")) return;
-  crispScriptRequested = true;
-
-  const script = document.createElement("script");
-  script.src = "https://client.crisp.chat/l.js";
-  script.async = true;
-  script.dataset.crispClient = "true";
-  document.head.appendChild(script);
+  return supportChatModulePromise;
 }
 
-function scheduleCrispChatLoad() {
-  if (!crispEnabled) return;
-  afterWindowLoad(() => {
-    window.setTimeout(() => runWhenIdle(loadCrispChat, 3000), 8000);
-  });
-}
-
-function openCrispChat() {
-  if (!crispEnabled) return;
-  loadCrispChat();
-  window.$crisp.push(["do", "chat:show"]);
-  window.$crisp.push(["do", "chat:open"]);
+function openSupportChat() {
+  loadSupportChat()
+    .then((module) => module.openSupportChat())
+    .catch(() => {
+      window.location.href = "https://t.me/HelloLZH";
+    });
 }
 
 menuButton?.addEventListener("click", () => {
   setMenu(!header.classList.contains("is-open"));
 });
 
-crispTriggers.forEach((trigger) => {
-  trigger.addEventListener("click", openCrispChat);
+chatTriggers.forEach((trigger) => {
+  trigger.addEventListener("click", openSupportChat);
 });
 
 navLinks.forEach((link) => {
@@ -165,8 +143,6 @@ document.addEventListener("keydown", (event) => {
     setMenu(false);
   }
 });
-
-scheduleCrispChatLoad();
 
 const copyButtons = Array.from(document.querySelectorAll("[data-copy]"));
 
